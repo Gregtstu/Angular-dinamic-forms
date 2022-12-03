@@ -1,0 +1,62 @@
+<ul class="users">
+  <li *ngFor="let user of users">
+    <ul class="fieldset-main">
+      <fieldset>
+        <legend>{{user.nameUser}}</legend>
+        <li class="wrapper">
+          <fieldset class="fieldset-child">
+            <legend>Предыдущие работы</legend>
+            <ul *ngFor="let work of user.worksUser">
+              <li>{{work}}</li>
+            </ul>
+          </fieldset>
+        </li>
+        <li class="wrapper">
+          <fieldset class="fieldset-child">
+            <legend>Доходы</legend>
+            <ul *ngFor="let money of user.moneyUser">
+              <li>{{money}}</li>
+            </ul>
+          </fieldset>
+        </li>
+        <li class="wrapper">
+          <fieldset class="fieldset-child">
+            <legend>Ключевые навыки</legend>
+            <ul *ngFor="let skill of user.skillsUser">
+              <li [ngStyle]="{
+              color: skill.best ? 'red' : 'black'
+              }"
+              >{{skill.value}}</li>
+            </ul>
+          </fieldset>
+        </li>
+        <li class="wrapper">
+          <fieldset class="fieldset-child">
+            <legend>Лучшие качества</legend>
+            <ul *ngFor="let about of user.aboutUser">
+              <li [ngStyle]="{
+              color: about.best ? 'red' : 'black'
+              }">{{about.value}}</li>
+            </ul>
+          </fieldset>
+        </li>
+        <li class="wrapper">
+          <button mat-icon-button
+                  color="accent"
+                  (click)="delete(user)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button
+                  color="primary"
+                  (click)="openDialog(user)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </li>
+      </fieldset>
+    </ul>
+  </li>
+</ul>
+
+

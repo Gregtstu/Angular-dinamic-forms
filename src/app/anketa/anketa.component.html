@@ -1,0 +1,60 @@
+<form [formGroup]="mainForm">
+  <mat-stepper class="container-fluid" orientation="vertical" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Ваше ФИО</ng-template>
+      <mat-form-field appearance="outline">
+        <mat-label>ФИО</mat-label>
+        <input matInput formControlName="nameUser" required>
+        <mat-error *ngIf="mainForm.get('nameUser')?.errors?.['required']">
+          <b>*Обязательное</b> для заполнения поле
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Сохранить</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Предыдущие места работы</ng-template>
+      <app-test-input formGroupName="worksUser"
+                      (worksArray)="addWorks($event)"
+      ></app-test-input>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Какие у Вас были доходы</ng-template>
+      <app-test-number formGroupName="moneyUser"
+                       (moneyArray)="addMoney($event)"
+      ></app-test-number>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Ваши ключевые навыки</ng-template>
+      <app-test-select formGroupName="skillsUser"
+                       (skillsArray)="addSkills($event)"
+      ></app-test-select>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Ваши лучшие качества</ng-template>
+      <app-test-checkbox formGroupName="aboutUser"
+                         (aboutArray)="addAbout($event)"
+      ></app-test-checkbox>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Сохранение информаци</ng-template>
+
+      <mat-error *ngIf="mainForm.invalid; else finish">
+        форма заполнена с ошибками! Вы не указали своё имя!
+      </mat-error>
+      <ng-template #finish>
+        <p style="color: green">Форма успешно заполнена, нажмите "сохранить"</p>
+      </ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Назад</button>
+        <button type="buttton"
+                mat-button mat-raised-button
+                color="primary"
+                [disabled]="mainForm.invalid"
+                (click)="submit(); stepper.reset()"
+        >Сохранить</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</form>

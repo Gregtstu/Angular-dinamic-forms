@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <ul>
+    <li [routerLink]="['/anketa']">
+      <a routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">Создать</a>
+    </li>
+    <li [routerLink]="['/all-users']">
+      <a routerLinkActive="active">Анкеты</a>
+    </li>
+  </ul>
+</mat-toolbar>
+<router-outlet></router-outlet>

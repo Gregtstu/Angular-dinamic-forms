@@ -1,0 +1,19 @@
+
+  <form [formGroup]="formInput" (submit)="saveWork()" >
+    <button class="action-btn" type="button" mat-raised-button color="primary" (click)="addWork()">добавить</button>
+    <mat-error *ngIf="formInput.get('works')?.errors?.['required']">
+      Для заполнения формы нажмите кнопку "добавить"
+    </mat-error>
+    <div *ngFor="let control of getControls(); let i = index" formGroupName="works">
+      <label>Работа {{i + 1}}</label>
+      <input class="input" type="text" [formControlName]="i">
+      <button mat-icon-button color="warn" (click)="remove(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Назад</button>
+      <button mat-button matStepperNext type="submit">Сохранить</button>
+    </div>
+  </form>
+

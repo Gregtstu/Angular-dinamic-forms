@@ -1,0 +1,18 @@
+<form [formGroup]="formNumber" (submit)="saveMoney()">
+  <button class="action-btn" type="button" mat-raised-button color="primary" (click)="addMoney()">добавить</button>
+  <mat-error *ngIf="getControls().length == 0">
+    Для заполнения формы нажмите кнопку "добавить"
+  </mat-error>
+  <div *ngFor="let control of getControls(); let i = index" formGroupName="money">
+    <label>ЗП на работе {{i + 1}}</label>
+    <input class="input" type="number" [formControlName]="i">
+    <button mat-icon-button color="warn" (click)="remove(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button mat-button matStepperPrevious>Назад</button>
+    <button mat-button matStepperNext type="submit">Сохранить</button>
+  </div>
+</form>

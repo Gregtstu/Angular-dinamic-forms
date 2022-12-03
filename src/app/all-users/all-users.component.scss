@@ -1,0 +1,29 @@
+.users {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+
+  .fieldset-main {
+    max-width: 300px;
+    border-radius: 20px;
+
+    .wrapper {
+      max-width: 300px;
+      display: flex;
+      justify-content: center;
+      justify-content: space-between;
+
+      .fieldset-child {
+        max-width: 200px;
+        border-radius: 10px;
+      }
+
+      .btn{
+        width: 100%;
+      }
+    }
+
+  }
+}
