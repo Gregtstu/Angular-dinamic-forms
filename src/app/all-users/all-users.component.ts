@@ -3,6 +3,7 @@ import {IUser} from "../shared/interfaces/iuser";
 import {ApiService} from "../shared/services/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
+import {AnketaComponent} from "../anketa/anketa.component";
 
 @Component({
   selector: 'app-all-users',

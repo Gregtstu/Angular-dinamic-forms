@@ -1,57 +1,107 @@
-<div mat-dialog-title class="actions">
-  <h2>Редактирование анкеты пользователя</h2>
+<!--<div mat-dialog-title class="actions">-->
+<!--  <h2>Редактирование анкеты пользователя</h2>-->
+<!--  <button mat-icon-button mat-dialog-close="close" color="accent">-->
+<!--    <mat-icon>close</mat-icon>-->
+<!--  </button>-->
+<!--</div>-->
+<!--<div class="content" mat-dialog-content>-->
+<!--  <form [formGroup]="form">-->
+<!--    <h2>ФИО:</h2>-->
+<!--    <mat-form-field appearance="outline">-->
+<!--      <mat-label>ФИО</mat-label>-->
+<!--      <input matInput required formControlName="nameUser">-->
+<!--    </mat-form-field>-->
+<!--    <h2>Предыдущие места работы:</h2>-->
+<!--    <mat-form-field appearance="outline"-->
+<!--                    formGroupName="worksUser"-->
+<!--                    *ngFor="let work of editData.worksUser; let idx = index">-->
+<!--      <mat-label>Предыдущие места работы</mat-label>-->
+<!--      <input matInput required [formControlName]="idx">-->
+<!--    </mat-form-field>-->
+<!--    <h2>Предыдущие доходы:</h2>-->
+<!--    <mat-form-field appearance="outline"-->
+<!--                    formGroupName="moneyUser"-->
+<!--                    *ngFor="let money of editData.moneyUser; let id = index">-->
+<!--      <mat-label>Предыдущие доходы</mat-label>-->
+<!--      <input matInput required [formControlName]="id">-->
+<!--    </mat-form-field>-->
+<!--    <h2>Навыки:</h2>-->
+<!--    <mat-form-field appearance="outline">-->
+<!--      <mat-label>Ваши ключевые навыки</mat-label>-->
+<!--      <mat-select>-->
+<!--        <mat-option *ngFor="let skill of editData.skillsUser; let i = index"-->
+<!--                    [value]="skill.value"-->
+<!--                    (click)="onBest(i)"-->
+<!--        >-->
+<!--          {{skill.value}}-->
+<!--        </mat-option>-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
+
+<!--    <ul *ngFor="let skill of editData.aboutUser; let i = index">-->
+<!--      <li>-->
+<!--        <mat-checkbox class="example-ripple-checkbox"-->
+<!--                      (click)="onBestAbout(i, checkbox)"-->
+<!--                      #checkbox-->
+<!--                      [checked]="skill.best"-->
+<!--        >{{skill.value}}</mat-checkbox>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </form>-->
+<!--</div>-->
+<!--<div class="actions" mat-dialog-actions >-->
+<!--  <button class="btn" mat-raised-button color="primary" (click)="subbmit()">редактировать</button>-->
+<!--  <button class="btn" mat-raised-button color="accent" mat-dialog-close="close">Отмена</button>-->
+<!--</div>-->
+<div class="actions" mat-dialog-title>
+  <h2>Редактирование анкеты</h2>
   <button mat-icon-button mat-dialog-close="close" color="accent">
     <mat-icon>close</mat-icon>
   </button>
 </div>
 <div class="content" mat-dialog-content>
   <form [formGroup]="form">
-    <h2>ФИО:</h2>
-    <mat-form-field appearance="outline">
-      <mat-label>ФИО</mat-label>
-      <input matInput required formControlName="nameUser">
-    </mat-form-field>
-    <h2>Предыдущие места работы:</h2>
-    <mat-form-field appearance="outline"
-                    formGroupName="worksUser"
-                    *ngFor="let work of editData.worksUser; let idx = index">
-      <mat-label>Предыдущие места работы</mat-label>
-      <input matInput required [formControlName]="idx">
-    </mat-form-field>
-    <h2>Предыдущие доходы:</h2>
-    <mat-form-field appearance="outline"
-                    formGroupName="moneyUser"
-                    *ngFor="let money of editData.moneyUser; let id = index">
-      <mat-label>Предыдущие доходы</mat-label>
-      <input matInput required [formControlName]="id">
-    </mat-form-field>
-    <h2>Навыки:</h2>
-    <mat-form-field appearance="outline">
-      <mat-label>Ваши ключевые навыки</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let skill of editData.skillsUser; let i = index"
-                    [value]="skill.value"
-                    (click)="onBest(i)"
-        >
-          {{skill.value}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <fieldset>
+      <legend>ФИО</legend>
+      <mat-form-field appearance="outline">
+        <mat-label>ФИО</mat-label>
+        <input matInput required formControlName="nameUser">
+      </mat-form-field>
+    </fieldset>
 
-    <ul *ngFor="let skill of editData.aboutUser; let i = index">
-      <li>
-        <mat-checkbox class="example-ripple-checkbox"
-                      (click)="onBestAbout(i, checkbox)"
-                      #checkbox
-                      [checked]="skill.best"
-        >{{skill.value}}</mat-checkbox>
-      </li>
-    </ul>
+    <fieldset>
+      <legend>Предыдущие работы</legend>
+      <app-test-input formGroupName="worksUser"
+                      [works]="editData.worksUser"
+                      (worksArrayData)="addWorks($event)"
+      ></app-test-input>
+    </fieldset>
+    <fieldset>
+      <legend>Предыдущие доходы</legend>
+      <app-test-number formGroupName="moneyUser"
+                       [money]="editData.moneyUser"
+                       (moneyArrayData)="addMoney($event)"
+      ></app-test-number>
+    </fieldset>
+    <fieldset>
+      <legend>Ключевые навыки</legend>
+      <app-test-select formGroupName="skillsUser"
+                       [skillsdata]="editData.skillsUser"
+                       (skillsArrayData)="addskills($event)"
+
+      ></app-test-select>
+    </fieldset>
+    <fieldset>
+      <legend>Ключевые навыки</legend>
+      <app-test-checkbox formGroupName="aboutUser"
+                         [aboutData]="editData.aboutUser"
+                         (aboutArray)="addAbout($event)"
+      ></app-test-checkbox>
+    </fieldset>
+
   </form>
 </div>
-<div class="actions" mat-dialog-actions >
+<div mat-dialog-actions>
   <button class="btn" mat-raised-button color="primary" (click)="subbmit()">редактировать</button>
   <button class="btn" mat-raised-button color="accent" mat-dialog-close="close">Отмена</button>
 </div>
-
-

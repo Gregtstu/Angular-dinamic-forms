@@ -1,25 +1,37 @@
-<label>Ваши качества</label>
-<input class="input" type="text" #inputValue>
-<button mat-icon-button (click)="addAbout(inputValue)">
-  <mat-icon>add</mat-icon>
-</button>
-<mat-error *ngIf="!about.length; else checkboxVew">
-  Добавьте свои качества и отметьте галочкой те, которые вы считаете выдающимися.
-</mat-error>
-<ng-template #checkboxVew>
-  <ul *ngFor="let skill of about; let i = index">
-    <li>
-      <mat-checkbox class="example-ripple-checkbox"
-                    (click)="onBest(i, checkbox)"
-                    #checkbox
-      >{{skill.value}}</mat-checkbox>
-      <button mat-icon-button color="warn" (click)="deleteSkill(i)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </li>
-  </ul>
+<ng-container *ngIf="!editFlag; else saved">
+  <label>Ваши качества</label>
+  <input class="input" type="text" #inputValue>
+  <button mat-icon-button (click)="addAbout(inputValue)">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-error *ngIf="!about.length; else checkboxVew">
+    Добавьте свои качества и отметьте галочкой те, которые вы считаете выдающимися.
+  </mat-error>
+  <ng-template #checkboxVew>
+    <ul *ngFor="let skill of about; let i = index">
+      <li>
+        <mat-checkbox class="example-ripple-checkbox"
+                      (click)="onBest(i, checkbox)"
+                      #checkbox
+                      [checked]="skill.best"
+        >{{skill.value}}</mat-checkbox>
+        <button mat-icon-button color="warn" (click)="deleteSkill(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </ng-template>
+  <div *ngIf="flagData; else dataBtn">
+    <button mat-button matStepperPrevious>Назад</button>
+    <button mat-button matStepperNext (click)="saveAbout()">Сохранить</button>
+  </div>
+  <ng-template #dataBtn>
+    <button mat-raised-button
+            color="primary"
+            (click)="emitChekbox()"
+    > Сохранить изменения </button>
+  </ng-template>
+</ng-container>
+<ng-template #saved>
+  <h2>Успешно изменено !</h2>
 </ng-template>
-<div>
-  <button mat-button matStepperPrevious>Назад</button>
-  <button mat-button matStepperNext (click)="saveAbout()">Сохранить</button>
-</div>

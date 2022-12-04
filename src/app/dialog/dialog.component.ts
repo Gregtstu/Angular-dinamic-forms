@@ -32,7 +32,7 @@ export class DialogComponent implements OnInit {
       for (let i = 0; i < this.editData.worksUser.length; i++) {
         (this.form.get('worksUser') as FormArray).insert(i, new FormControl(''));
       }
-      for (let i = 0; i < this.editData.skillsUser.length; i++) {
+      for (let i = 0; i < this.editData.moneyUser.length; i++) {
         (this.form.get('moneyUser') as FormArray).insert(i, new FormControl(''));
       }
       for (let i = 0; i < this.editData.skillsUser.length; i++) {
@@ -43,37 +43,27 @@ export class DialogComponent implements OnInit {
       }
 
       this.form.controls['nameUser'].setValue(this.editData.nameUser);
-      this.form.controls['worksUser'].patchValue(this.editData.worksUser);
+      this.form.controls['worksUser'].setValue(this.editData.worksUser);
       this.form.controls['moneyUser'].patchValue(this.editData.moneyUser);
       this.form.controls['skillsUser'].patchValue(this.editData.skillsUser);
       this.form.controls['aboutUser'].patchValue(this.editData.aboutUser);
     }
   }
 
-
-  onBest(i: number) {
-    this.editData.skillsUser.map((item, index) => {
-      if (index === i && item.best === false) {
-        item.best = true;
-      } else {
-        item.best = false;
-      }
-    })
+  addWorks(works:any) {
+    this.form.value.worksUser = works;
   }
 
+  addMoney(money: any) {
+    this.form.value.moneyUser = money;
+  }
 
-  // deleteSkill(i: number) {
-  //   this.editData.aboutUser = this.editData.aboutUser.filter((item,index) => index != i)
-  // }
+  addskills(skills: any) {
+    this.form.value.skillsUser = skills;
+  }
 
-  onBestAbout(i: number, checkbox: any) {
-    this.editData.aboutUser.map((item:any, index:any) => {
-      if(checkbox.checked && index === i && item.best === false){
-        item.best = true;
-      }else if(!checkbox.checked && index === i && item.best === true) {
-        item.best = false;
-      }
-    })
+  addAbout(about: { value: string; best: boolean }[]) {
+    this.form.value.aboutUser = about;
   }
 
   subbmit() {
@@ -83,6 +73,7 @@ export class DialogComponent implements OnInit {
           alert('Анкета успешно изменена!');
           this.dialogRef.close('update')
         }
-      })
+      });
   }
+
 }

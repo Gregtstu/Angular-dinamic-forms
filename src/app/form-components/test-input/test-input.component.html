@@ -1,6 +1,13 @@
-
-  <form [formGroup]="formInput" (submit)="saveWork()" >
-    <button class="action-btn" type="button" mat-raised-button color="primary" (click)="addWork()">добавить</button>
+<ng-container *ngIf="!editFlag; else saved">
+  <form [formGroup]="formInput" (submit)="saveWork()">
+    <button class="action-btn"
+            type="button"
+            mat-raised-button color="primary"
+            (click)="addWork()"
+            [disabled]="editFlag"
+    >
+      добавить
+    </button>
     <mat-error *ngIf="formInput.get('works')?.errors?.['required']">
       Для заполнения формы нажмите кнопку "добавить"
     </mat-error>
@@ -11,9 +18,18 @@
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-    <div>
+    <div *ngIf="flagData; else dataBtn">
       <button mat-button matStepperPrevious>Назад</button>
       <button mat-button matStepperNext type="submit">Сохранить</button>
     </div>
+    <ng-template #dataBtn>
+      <button mat-raised-button
+              color="primary"
+              type="submit"
+      > Сохранить изменения </button>
+    </ng-template>
   </form>
-
+</ng-container>
+<ng-template #saved>
+  <h2>Успешно изменено !</h2>
+</ng-template>
