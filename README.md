@@ -14,8 +14,8 @@ frontend:\
 5 REST API (GET, POST, DELETE, PUT);\
 6 Modules architecture;\
 7 Angular;\
-8 Material;\
+8 Material;
 ***
 backend:\
-1 firebase;\
+1 firebase;
 
